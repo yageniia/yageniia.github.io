@@ -37,6 +37,11 @@ if (stored === "dark") {
             const source = image.getAttribute('src');
             if (source && assets[source]) image.src = assets[source];
           });
+          const svgImages = root instanceof SVGImageElement ? [root] : root.querySelectorAll?.('image[href]') ?? [];
+          svgImages.forEach((image) => {
+            const source = image.getAttribute('href');
+            if (source && assets[source]) image.setAttribute('href', assets[source]);
+          });
         };
         new MutationObserver((mutations) => mutations.forEach((mutation) => {
           mutation.addedNodes.forEach((node) => {
